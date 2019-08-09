@@ -24,20 +24,26 @@ cp "${aar_file}" "${rootdir}"/libvlc/libvlc-3.0.0.aar
 checkfail "libvlc*.arr not found"
 
 VLC_SRC_DIR=`realpath "${rootdir}"/vlc-android/vlc`
-LIBVLC_LIBS=`realpath "${rootdir}"/vlc-android/libvlc/jni/libs`
+LIBVLCJNI_LIBS=`realpath "${rootdir}"/vlc-android/libvlc/jni/libs`
 
 for project in native_sample;do
-    for arch in `ls ${LIBVLC_LIBS}`;do
-        if [ ! -f "${LIBVLC_LIBS}/${arch}/libvlcjni.so" ];then
-            continue
+    for jnilinkdir in ${LIBVLCJNI_LIBS}/*;do
+        arch=`basename $jnilinkdir`
+        if [ ! -f "${jnilinkdir}/libvlcjni.so" ];then
+            continue;
         fi
-
-        $ANDROID_NDK/ndk-build -C "${rootdir}"/${project} \
-            VLC_SRC_DIR="${VLC_SRC_DIR}" \
-            LIBVLC_LIBS="${LIBVLC_LIBS}/${arch}" \
-            APP_BUILD_SCRIPT=jni/Android.mk \
-            APP_PLATFORM=android-9 \
-            APP_ABI=${arch} \
-            NDK_PROJECT_PATH=jni
+        for linkdir in ${VLC_SRC_DIR}/build-android*/ndk/libs/${arch};do
+            if [ ! -f "${linkdir}/libvlc.so" ];then
+                continue;
+            fi
+            $ANDROID_NDK/ndk-build -C "${rootdir}"/${project} \
+                VLC_SRC_DIR="${VLC_SRC_DIR}" \
+                LIBVLC_LDLIBS="-L${linkdir} -L${jnilinkdir} -lvlc -lvlcjni" \
+                APP_BUILD_SCRIPT=jni/Android.mk \
+                APP_PLATFORM=android-9 \
+                APP_ABI=${arch} \
+                NDK_PROJECT_PATH=jni
+            break
+        done
     done
 done
