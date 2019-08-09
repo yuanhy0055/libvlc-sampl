@@ -42,26 +42,10 @@ public class NativeActivity extends AppCompatActivity implements IVLCVout.Callba
         if (sInit != -1)
             return sInit == 1;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD_MR1) {
-            try {
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR1)
-                    System.loadLibrary("anw.10");
-                else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2)
-                    System.loadLibrary("anw.13");
-                else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1)
-                    System.loadLibrary("anw.14");
-                else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT_WATCH)
-                    System.loadLibrary("anw.18");
-                else
-                    System.loadLibrary("anw.21");
-            } catch (Throwable t) {
-                Log.w(TAG, "Unable to load the anw library: " + t);
-            }
-        }
-
         try {
+            System.loadLibrary("c++_shared");
+            System.loadLibrary("vlc");
             System.loadLibrary("vlcjni");
-            System.loadLibrary("jniloader");
             System.loadLibrary("native");
         } catch (UnsatisfiedLinkError ule) {
             Toast.makeText(context, "Can't load vlcjni library: " + ule, Toast.LENGTH_LONG).show();
