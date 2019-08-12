@@ -1,7 +1,7 @@
 /*****************************************************************************
  * JavaActivity.java
  *****************************************************************************
- * Copyright (C) 2016 VideoLAN
+ * Copyright (C) 2016-2019 VideoLAN
  * All rights reserved.
  *
  * This software may be modified and distributed under the terms
@@ -10,8 +10,10 @@
 
 package org.videolan.javasample;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.videolan.libvlc.LibVLC;
 import org.videolan.libvlc.Media;
 import org.videolan.libvlc.MediaPlayer;

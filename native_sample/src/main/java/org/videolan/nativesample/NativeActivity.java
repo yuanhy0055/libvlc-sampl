@@ -1,7 +1,7 @@
 /*****************************************************************************
  * NativeActivity.java
  *****************************************************************************
- * Copyright (C) 2016 VideoLAN
+ * Copyright (C) 2016-2019 VideoLAN
  * All rights reserved.
  *
  * This software may be modified and distributed under the terms
@@ -11,16 +11,12 @@
 package org.videolan.nativesample;
 
 import android.content.Context;
-import android.graphics.PixelFormat;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.ViewStub;
-import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.videolan.libvlc.AWindow;
 import org.videolan.libvlc.IVLCVout;
@@ -39,9 +35,7 @@ public class NativeActivity extends AppCompatActivity implements IVLCVout.Callba
 
     private static int sInit = -1;
     static synchronized boolean loadLibraries(Context context) {
-        if (sInit != -1)
-            return sInit == 1;
-
+        if (sInit != -1) return sInit == 1;
         try {
             System.loadLibrary("c++_shared");
             System.loadLibrary("vlc");
@@ -73,8 +67,8 @@ public class NativeActivity extends AppCompatActivity implements IVLCVout.Callba
         mAWindow = new AWindow(null);
         mAWindow.addCallback(this);
 
-        mUiSurface = (SurfaceView) findViewById(R.id.ui_surface);
-        mVideoSurface = (SurfaceView) findViewById(R.id.video_surface);
+        mUiSurface = findViewById(R.id.ui_surface);
+        mVideoSurface = findViewById(R.id.video_surface);
 
         if (!nativeCreate()) {
             Toast.makeText(this, "Couldn't create LibVLC", Toast.LENGTH_LONG).show();
