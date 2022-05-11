@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk 28
+    compileSdkVersion 28
     sourceSets {
         main {
             jni.srcDirs = []
@@ -32,6 +32,12 @@ android {
     }
     ndkVersion '21.4.7075529'
     buildToolsVersion '28.0.3'
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'androidx.core:core:1.6.0'
+    }
 }
 
 dependencies {
