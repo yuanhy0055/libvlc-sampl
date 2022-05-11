@@ -64,8 +64,8 @@ public class NativeActivity extends AppCompatActivity implements IVLCVout.Callba
 
         setContentView(R.layout.activity_main);
 
-        mAWindow = new AWindow(null);
-        mAWindow.addCallback(this);
+        //mAWindow = new AWindow(null);
+        //mAWindow.addCallback(this);
 
         mUiSurface = findViewById(R.id.ui_surface);
         mVideoSurface = findViewById(R.id.video_surface);
@@ -118,6 +118,11 @@ public class NativeActivity extends AppCompatActivity implements IVLCVout.Callba
             nativeStop();
 
         mAWindow.detachViews();
+    }
+
+    @Override
+    public void onNewLayout(IVLCVout ivlcVout, int i, int i1, int i2, int i3, int i4, int i5) {
+        // 不是抽象的, ...
     }
 
     @Override
