@@ -10,6 +10,7 @@
 
 package org.videolan.javasample;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,13 +61,11 @@ public class JavaActivity extends AppCompatActivity  {
 
         mMediaPlayer.attachViews(mVideoLayout, null, ENABLE_SUBTITLES, USE_TEXTURE_VIEW);
 
-        try {
-            final Media media = new Media(mLibVLC, getAssets().openFd(ASSET_FILENAME));
-            mMediaPlayer.setMedia(media);
-            media.release();
-        } catch (IOException e) {
-            throw new RuntimeException("Invalid asset folder");
-        }
+        //Uri uri = Uri.parse("http://39.108.88.55:8048/hls/hmy.m3u8");
+        Uri uri = Uri.parse("http://39.108.88.55:8048/qiyi?port=1935&app=qiyi&stream=zb");
+        final Media media = new Media(mLibVLC, uri /*getAssets().openFd(ASSET_FILENAME)*/);
+        mMediaPlayer.setMedia(media);
+        media.release();
         mMediaPlayer.play();
     }
 
