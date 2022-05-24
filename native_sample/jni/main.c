@@ -14,7 +14,7 @@
 #include <vlc/vlc.h>
 #include <vlc/libvlc_media_player.h>
 
-#define SAMPLE_URL "http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_640x360.m4v"
+#define SAMPLE_URL "http://119.23.20.22:8048/live/livestream.m3u8"
 
 enum surface_layout
 {

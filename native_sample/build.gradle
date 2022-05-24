@@ -17,7 +17,8 @@ android {
         versionName "1.0"
         externalNativeBuild {
             ndkBuild {
-                cppFlags ''
+                arguments 'V=1'
+                cppFlags '-DNICO_DEBUG=1'
             }
         }
     }
@@ -28,7 +29,7 @@ android {
         }
         debug {
             ndk {
-                abiFilters "x86"
+                abiFilters "armeabi-v7a"
                 //abiFilters ABI_FILTERS, "armeabi-v7a", "armeabi"
             }
         }
@@ -55,7 +56,7 @@ configurations.all {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation project(':libvlc')
