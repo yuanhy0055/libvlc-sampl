@@ -1,2 +1,4 @@
-package com.example.yyoaku;public class yycls1 {
+package com.example.yyoaku;
+
+public class yycls1 {
 }
