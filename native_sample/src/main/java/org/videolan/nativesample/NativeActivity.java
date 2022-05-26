@@ -12,11 +12,14 @@ package org.videolan.nativesample;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.yyoaku.yycls1;
 
 import org.videolan.libvlc.AWindow;
 import org.videolan.libvlc.interfaces.IVLCVout;
@@ -63,6 +66,10 @@ public class NativeActivity extends AppCompatActivity implements IVLCVout.Callba
         }
 
         setContentView(R.layout.activity_main);
+
+        yycls1 yy1 = new yycls1();
+        int s = yy1.yy_ADD(3, 8);
+        Log.d("TTGG>", "sum=" + s);
 
         mAWindow = new AWindow(null);
         mAWindow.addCallback(this);
