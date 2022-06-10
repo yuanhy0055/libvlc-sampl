@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 31
     sourceSets {
         main {
             jni.srcDirs = []
@@ -31,7 +31,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     ndkVersion '21.4.7075529'
-    buildToolsVersion '28.0.3'
 
     repositories{
         flatDir{
@@ -51,5 +50,5 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //implementation 'org.videolan.android:libvlc-all:3.1.12'
-    implementation(name: 'libvlc-nico-3.5.0', ext: 'aar')//使用本地aar
+    implementation(name: 'libvlc-all-3.5.0-eap4', ext: 'aar')//使用本地aar
 }
